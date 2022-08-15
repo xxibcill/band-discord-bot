@@ -4,6 +4,7 @@ import string
 from dotenv import load_dotenv
 load_dotenv()
 import query
+from google.protobuf.json_format import MessageToJson
 
 # This example requires the 'members' and 'message_content' privileged intents to function.
 
@@ -85,7 +86,36 @@ async def sequence(ctx, address: str):
     else:
         await ctx.send(f"account **{address}** does not exist")
 
-bot.run(os.getenv('TOKEN'))
+@bot.group()
+async def transaction(ctx):
+    """Transaction group command
+        !transaction height <txhash> -> to get block of Tx
+    """
+    if ctx.invoked_subcommand is None:
+        await ctx.send(f'No, {ctx.subcommand_passed} is not cool')
 
-# print(query.get_latest_block_height())
+
+@transaction.command(name='height')
+async def _height(ctx,hash: str):
+    """get block height of Tx"""
+    await ctx.send(query.get_block_from_tx(hash))
+
+@transaction.command(name='info')
+async def _info(ctx,hash: str):
+    """get transaction infomation"""
+    tx = query.get_tx(hash)
+    embed=discord.Embed(
+        title=f"Transaction #{hash}",
+        url=f"https://cosmoscan.io/tx/{hash}",
+        color=discord.Color.blue()
+    )
+    embed.add_field(name="**Block**", value=tx.tx_response.height, inline=False)
+    # embed.add_field(name="**Sender**", value=tx.tx_response.height, inline=False)
+    
+    await ctx.channel.send(embed=embed)
+
+# bot.run(os.getenv('TOKEN'))
+
+print(query.get_block_from_tx("ECDDD944CB366C9F6BD212E08B8F79313AFA2A7018EB545E7E808B299E4A4602"))
+
 

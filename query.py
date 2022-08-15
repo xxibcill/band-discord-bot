@@ -12,11 +12,19 @@ from pyband.proto.cosmos.bank.v1beta1.tx_pb2 import MsgSend
 from pyband.proto.cosmos.bank.v1beta1.tx_pb2 import MsgMultiSendResponse
 from google.protobuf.json_format import MessageToJson
 
+import grpc
+from proto.cosmos.tx.v1beta1 import (
+    service_pb2_grpc as tx_service_grpc,
+    service_pb2 as tx_service,
+)
+    
+
 MNEMONIC = "brown kite lady anger income eager left since brown cruise arch danger"
 # MNEMONIC = "danger kite lady anger income eager left since brown cruise arch danger"
 
-grpc_url = "laozi1.bandchain.org" # ex.laozi-testnet5.bandchain.org(without https://)
-client = Client(grpc_url)
+grpc_endpoint = "laozi-testnet5.bandchain.org" # ex.laozi-testnet5.bandchain.org(without https://)
+# grpc_endpoint = "laozi1.bandchain.org" # ex.laozi-testnet5.bandchain.org(without https://)
+client = Client(grpc_endpoint)
 
 def get_account(private_key):
     # Step 1
@@ -119,6 +127,19 @@ def get_account(address):
 
 def get_block_height():
     return client.get_latest_block().block.header.height
+
+def get_tx(tx_hash):
+    channel = grpc.secure_channel(grpc_endpoint,grpc.ssl_channel_credentials())
+    stubTx = tx_service_grpc.ServiceStub(channel)
+    tx = stubTx.GetTx(tx_service.GetTxRequest(hash=tx_hash))
+    return tx
+
+
+def get_block_from_tx(tx_hash):
+    tx = get_tx(tx_hash)
+    with open('tx.json', 'w') as f:
+        f.write(MessageToJson(tx))
+    return tx.tx_response.height
 
 # band1pdvm6paaenlelmga2qkr50thpkrzwxy3gsr4xs
 # band1w2fh72f6u76l8pk5vewzqg30aztflthg5ufrst

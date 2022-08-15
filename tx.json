@@ -1,0 +1,156 @@
+{
+  "tx": {
+    "body": {
+      "messages": [
+        {
+          "@type": "/cosmos.bank.v1beta1.MsgSend",
+          "fromAddress": "band1xwyk9nacxwvw3whcvf5kkgkv0nmd2g4myzze9k",
+          "toAddress": "band12ht4jgkaz9ez0htzuyr7rwj78ljs6akykpjz9k",
+          "amount": [
+            {
+              "denom": "uband",
+              "amount": "10000000"
+            }
+          ]
+        }
+      ]
+    },
+    "authInfo": {
+      "signerInfos": [
+        {
+          "publicKey": {
+            "@type": "/cosmos.crypto.secp256k1.PubKey",
+            "key": "AzRoT833e4/SOMUKIhh1EjeIvT9JbE+fxpg/KFzust9o"
+          },
+          "modeInfo": {
+            "single": {
+              "mode": "SIGN_MODE_DIRECT"
+            }
+          },
+          "sequence": "43254"
+        }
+      ],
+      "fee": {
+        "gasLimit": "200000"
+      }
+    },
+    "signatures": [
+      "bsPrexdryULBFLkBCtCZrkltfEpUaX1CgGzynlK9PIBPF8y41FJYGtNusxofEDxWq2Oh8rW8dpN7YXVpZhXXow=="
+    ]
+  },
+  "txResponse": {
+    "height": "753164",
+    "txhash": "ECDDD944CB366C9F6BD212E08B8F79313AFA2A7018EB545E7E808B299E4A4602",
+    "data": "0A1E0A1C2F636F736D6F732E62616E6B2E763162657461312E4D736753656E64",
+    "rawLog": "[{\"events\":[{\"type\":\"coin_received\",\"attributes\":[{\"key\":\"receiver\",\"value\":\"band12ht4jgkaz9ez0htzuyr7rwj78ljs6akykpjz9k\"},{\"key\":\"amount\",\"value\":\"10000000uband\"}]},{\"type\":\"coin_spent\",\"attributes\":[{\"key\":\"spender\",\"value\":\"band1xwyk9nacxwvw3whcvf5kkgkv0nmd2g4myzze9k\"},{\"key\":\"amount\",\"value\":\"10000000uband\"}]},{\"type\":\"message\",\"attributes\":[{\"key\":\"action\",\"value\":\"/cosmos.bank.v1beta1.MsgSend\"},{\"key\":\"sender\",\"value\":\"band1xwyk9nacxwvw3whcvf5kkgkv0nmd2g4myzze9k\"},{\"key\":\"module\",\"value\":\"bank\"}]},{\"type\":\"transfer\",\"attributes\":[{\"key\":\"recipient\",\"value\":\"band12ht4jgkaz9ez0htzuyr7rwj78ljs6akykpjz9k\"},{\"key\":\"sender\",\"value\":\"band1xwyk9nacxwvw3whcvf5kkgkv0nmd2g4myzze9k\"},{\"key\":\"amount\",\"value\":\"10000000uband\"}]}]}]",
+    "logs": [
+      {
+        "events": [
+          {
+            "type": "coin_received",
+            "attributes": [
+              {
+                "key": "receiver",
+                "value": "band12ht4jgkaz9ez0htzuyr7rwj78ljs6akykpjz9k"
+              },
+              {
+                "key": "amount",
+                "value": "10000000uband"
+              }
+            ]
+          },
+          {
+            "type": "coin_spent",
+            "attributes": [
+              {
+                "key": "spender",
+                "value": "band1xwyk9nacxwvw3whcvf5kkgkv0nmd2g4myzze9k"
+              },
+              {
+                "key": "amount",
+                "value": "10000000uband"
+              }
+            ]
+          },
+          {
+            "type": "message",
+            "attributes": [
+              {
+                "key": "action",
+                "value": "/cosmos.bank.v1beta1.MsgSend"
+              },
+              {
+                "key": "sender",
+                "value": "band1xwyk9nacxwvw3whcvf5kkgkv0nmd2g4myzze9k"
+              },
+              {
+                "key": "module",
+                "value": "bank"
+              }
+            ]
+          },
+          {
+            "type": "transfer",
+            "attributes": [
+              {
+                "key": "recipient",
+                "value": "band12ht4jgkaz9ez0htzuyr7rwj78ljs6akykpjz9k"
+              },
+              {
+                "key": "sender",
+                "value": "band1xwyk9nacxwvw3whcvf5kkgkv0nmd2g4myzze9k"
+              },
+              {
+                "key": "amount",
+                "value": "10000000uband"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "gasWanted": "200000",
+    "gasUsed": "53145",
+    "tx": {
+      "@type": "/cosmos.tx.v1beta1.Tx",
+      "body": {
+        "messages": [
+          {
+            "@type": "/cosmos.bank.v1beta1.MsgSend",
+            "fromAddress": "band1xwyk9nacxwvw3whcvf5kkgkv0nmd2g4myzze9k",
+            "toAddress": "band12ht4jgkaz9ez0htzuyr7rwj78ljs6akykpjz9k",
+            "amount": [
+              {
+                "denom": "uband",
+                "amount": "10000000"
+              }
+            ]
+          }
+        ]
+      },
+      "authInfo": {
+        "signerInfos": [
+          {
+            "publicKey": {
+              "@type": "/cosmos.crypto.secp256k1.PubKey",
+              "key": "AzRoT833e4/SOMUKIhh1EjeIvT9JbE+fxpg/KFzust9o"
+            },
+            "modeInfo": {
+              "single": {
+                "mode": "SIGN_MODE_DIRECT"
+              }
+            },
+            "sequence": "43254"
+          }
+        ],
+        "fee": {
+          "gasLimit": "200000"
+        }
+      },
+      "signatures": [
+        "bsPrexdryULBFLkBCtCZrkltfEpUaX1CgGzynlK9PIBPF8y41FJYGtNusxofEDxWq2Oh8rW8dpN7YXVpZhXXow=="
+      ]
+    },
+    "timestamp": "2022-08-15T15:20:53Z"
+  }
+}

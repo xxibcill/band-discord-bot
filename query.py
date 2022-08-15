@@ -15,7 +15,7 @@ from google.protobuf.json_format import MessageToJson
 MNEMONIC = "brown kite lady anger income eager left since brown cruise arch danger"
 # MNEMONIC = "danger kite lady anger income eager left since brown cruise arch danger"
 
-grpc_url = "laozi-testnet5.bandchain.org" # ex.laozi-testnet5.bandchain.org(without https://)
+grpc_url = "laozi1.bandchain.org" # ex.laozi-testnet5.bandchain.org(without https://)
 client = Client(grpc_url)
 
 def get_account(private_key):
@@ -105,8 +105,20 @@ def sign_tx(txn,private_key):
     tx_raw_bytes = txn.get_tx_data(signature, public_key)
     return tx_raw_bytes
 
-def gerrefdata(pairs):
+def ger_ref_data(pairs):
     return client.get_reference_data(pairs, 10, 16)
+
+def get_oracle_script(id):
+    return client.get_oracle_script(id)
+    
+def get_data_source(id):
+    return client.get_data_source(id)
+
+def get_account(address):
+    return client.get_account(address)
+
+def get_latest_block():
+    return client.get_latest_block()
 
 # band1pdvm6paaenlelmga2qkr50thpkrzwxy3gsr4xs
 # band1w2fh72f6u76l8pk5vewzqg30aztflthg5ufrst

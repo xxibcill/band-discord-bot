@@ -20,7 +20,7 @@ intents = discord.Intents.default()
 intents.members = True
 intents.messages = True
 
-bot = commands.Bot(command_prefix='?', description=description, intents=intents)
+bot = commands.Bot(command_prefix='!', description=description, intents=intents)
 
 
 @bot.event
@@ -28,71 +28,52 @@ async def on_ready():
     print(f'Logged in as {bot.user} (ID: {bot.user.id})')
     print('------')
 
-
-@bot.command()
-async def add(ctx, left: int, right: int):
-    """Adds two numbers together."""
-    await ctx.send(left + right)
-
 @bot.command()
 async def echo(ctx, txt: str):
-    """Adds two numbers together."""
+    """just Echo"""
     await ctx.send(f"echo {txt}")
 
 @bot.command()
 async def price(ctx, symbol: str):
-    """pyband get reference data"""
-    await ctx.send(query.gerrefdata([f"{symbol}/USD"])[0].rate)
+    """get reference data by provide 1 symbol"""
+    await ctx.send(query.ger_ref_data([f"{symbol}/USD"])[0].rate)
 
 @bot.command()
-async def roll(ctx, dice: str):
-    """Rolls a dice in NdN format."""
-    try:
-        rolls, limit = map(int, dice.split('d'))
-    except Exception:
-        await ctx.send('Format has to be in NdN!')
-        return
-
-    result = ', '.join(str(random.randint(1, limit)) for r in range(rolls))
-    await ctx.send(result)
-
-
-@bot.command(description='For when you wanna settle the score some other way')
-async def choose(ctx, *choices: str):
-    """Chooses between multiple choices."""
-    await ctx.send(random.choice(choices))
-
+async def oraclescript(ctx, id: int):
+    """show oracle script infomation by id"""
+    oracle_script = query.get_oracle_script(id)
+    embed=discord.Embed(
+        title=f"Oracle Script #{id} {oracle_script.name}",
+        url=f"https://cosmoscan.io/oracle-script/{id}",
+        description=oracle_script.description,
+        color=discord.Color.blue()
+    )
+    embed.add_field(name="**owner**", value=oracle_script.owner, inline=False)
+    embed.add_field(name="**filename**", value=oracle_script.filename, inline=False)
+    embed.add_field(name="**schema**", value=f"`{oracle_script.schema}`", inline=False)
+    embed.add_field(name="**sourceCodeUrl**", value=oracle_script.source_code_url, inline=False)
+    
+    await ctx.channel.send(embed=embed)
 
 @bot.command()
-async def repeat(ctx, times: int, content='repeating...'):
-    """Repeats a message multiple times."""
-    for i in range(times):
-        await ctx.send(content)
+async def datasource(ctx, id: int):
+    """show datasource infomation by id"""
+    oracle_script = query.get_data_source(id)
+    embed=discord.Embed(
+        title=f"Oracle Script #{id} {oracle_script.name}",
+        url=f"https://cosmoscan.io/data-source/{id}",
+        description=oracle_script.description,
+        color=discord.Color.blue()
+    )
+    embed.add_field(name="**owner**", value=f"[{oracle_script.owner}](https://cosmoscan.io/account/{oracle_script.owner})", inline=False)
+    embed.add_field(name="**filename**", value=oracle_script.filename, inline=False)
+    embed.add_field(name="**treasury**", value=f"[{oracle_script.treasury}](https://cosmoscan.io/account/{oracle_script.treasury})", inline=False)
+    
+    await ctx.channel.send(embed=embed)
 
-
-@bot.command()
-async def joined(ctx, member: discord.Member):
-    """Says when a member joined."""
-    await ctx.send(f'{member.name} joined {discord.utils.format_dt(member.joined_at)}')
-
-
-@bot.group()
-async def cool(ctx):
-    """Says if a user is cool.
-
-    In reality this just checks if a subcommand is being invoked.
-    """
-    if ctx.invoked_subcommand is None:
-        await ctx.send(f'No, {ctx.subcommand_passed} is not cool')
-
-
-@cool.command(name='bot')
-async def _bot(ctx):
-    """Is the bot cool?"""
-    await ctx.send('Yes, the bot is cool.')
 
 
 bot.run(os.getenv('TOKEN'))
 
-# print(query.gerrefdata(["BTC/USD", "ETH/USD"])[0].rate)
+# print(query.get_data_source(111))
 

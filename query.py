@@ -117,8 +117,8 @@ def get_data_source(id):
 def get_account(address):
     return client.get_account(address)
 
-def get_latest_block():
-    return client.get_latest_block()
+def get_block_height():
+    return client.get_latest_block().block.header.height
 
 # band1pdvm6paaenlelmga2qkr50thpkrzwxy3gsr4xs
 # band1w2fh72f6u76l8pk5vewzqg30aztflthg5ufrst

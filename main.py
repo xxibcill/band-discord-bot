@@ -71,9 +71,21 @@ async def datasource(ctx, id: int):
     
     await ctx.channel.send(embed=embed)
 
+@bot.command()
+async def blockheight(ctx):
+    """get current block height"""
+    await ctx.send(f"current block height is {query.get_block_height()}")
 
+@bot.command()
+async def sequence(ctx, address: str):
+    """get sequence of address"""
+    acc = query.get_account(address)
+    if(acc != None):
+        await ctx.send(f"current sequence of {address} is **{acc.sequence}**")
+    else:
+        await ctx.send(f"account **{address}** does not exist")
 
 bot.run(os.getenv('TOKEN'))
 
-# print(query.get_data_source(111))
+# print(query.get_latest_block_height())
 
